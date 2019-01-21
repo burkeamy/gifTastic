@@ -1,47 +1,39 @@
 $(document).ready(function() {
-    var animals = ["cat", "otter", "dog"];
-    var animal;
-    
-    function renderButtons() {
-        $("#animalButtons").empty();
+   var animals = ["cat", "dog", "otter", "ferret"];
+   
+/*function renderButtons(animals) {
+   animals.forEach(function(animal){
+    var button = $("<button>");
+    button.addClass("animalButtons");
+    button.attr("data-name", animal);
+    button.text(animal);
+    $("#animalButtons").append(button);
+    console.log(buttons);
+})*/
 
-    animals.forEach(function(animal) {
-        var button = $("<button>");
-        button.addClass("animal");
-        button.attr("data-name", animal);
-        button.text(animal);
-        $("#animalButtons").append(button);  
-      })
-    }
-
-    $("#plusAnimal").on("click", function(event) {
-        event.preventDefault();
-        var value = $("#addAnAnimal").val().trim();
-        animals.push(value);
-        renderButtons();
-    });
-    
-    function alertAnimal() {
-      animalName = $(this).attr("data-name");
-    
-    
-    $(document).on("click",".animal", function(){
-
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=3RAdvavxhi69zT49G8Fcr2QE3nIIdz4a&q=" + this.getAttribute("data-name") + "&limit=10&offset=0&rating=PG&lang=en";
-
-    $.ajax({
-      url: queryURL,
-      method: "GET"
+$.ajax({
+    url: "https://api.giphy.com/v1/gifs/search?api_key=3RAdvavxhi69zT49G8Fcr2QE3nIIdz4a&q=cat&limit=10&offset=0&rating=PG&lang=en",
+    method: "GET"
     }).then(function(response) {
-      console.log(response);
-        $("#animalView").text(JSON.stringify(response));
+        console.log(response);
+        for (var i =0; i<10; i++) { 
+        var animalDiv = $("<div class = 'animal'>");
+        var stillUrl = response.data[i].images.fixed_height_still.url;
+        var rating = response.data[i].rating;
+        var moveUrl = response.data[i].embed_url;
+        var img = $("<img>").attr("src", stillUrl);
+        var moveImg = $("<img>").attr("src", moveUrl);
+            
+        var ratingEl = $("<P>").text("Rating: "+ rating);
+        
+        animalDiv.prepend(ratingEl, img);
+        $("#animalsView").html(animalDiv);
 
-    
-      /*var animalDiv = $("<div class = 'animal'>")  
-      animalDiv.append(img);      
-      $("#giphy").append(animalDiv);*/
-      });
-     });
-    };
-      //renderButtons(); 
-})
+       /*if ("src" === stillUrl) {
+           $(img).on("click", function(animate){
+            $(img).append("src", moveUrl);
+           });*/
+        }     
+    });
+});
+
