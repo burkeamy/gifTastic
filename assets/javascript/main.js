@@ -18,9 +18,11 @@ $("#addAnAnimal").click(function(event) {
     animals.push(value);    
 });
 
-$("#animalButtons").click(function(){
+$("#animalButtons").on("click","button",function(e){
     var animal = $(this).attr("data-name");
-    console.log(this);
+    
+    //$(event).target.innerText
+    console.log($(this));
     console.log(animal);
 
 $.ajax({
