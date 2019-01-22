@@ -1,13 +1,19 @@
 $(document).ready(function() {
    var animals = ["cat", "dog", "otter", "ferret"];
+   var animal;
    
 for (var i = 0; i<animals.length;i++) {
     var button = $("<button>");
+    button.addClass("btn btn-primary");
     button.addClass("animalButtons");
     button.text(animals[i]);
     $("#animalButtons").append(button);
-};
-})
+}
+$("#animalButtons").click(function() { 
+    animal = animals[i];
+    console.log("click");
+    $("#animalButtons").val(animals[i]);
+});
 
 $.ajax({
     url: "https://api.giphy.com/v1/gifs/search?api_key=3RAdvavxhi69zT49G8Fcr2QE3nIIdz4a&q=cat&limit=10&offset=0&rating=PG&lang=en",
@@ -27,14 +33,14 @@ $.ajax({
         $("#animalsView").before(animalDiv);
         
         $(img).on("click", function(){
-            if ("src" === stillUrl);
+            $(this).attr("src", moveUrl);
+            /*if ("src" === stillUrl);
             $(img).appendTo("src", moveUrl);
             animalDiv.before(ratingEl, img);
             $("#animalsView").
              else 
-                $(img).replaceWith("src", stillUrl);
+                $(img).replaceWith("src", stillUrl);*/
            });
         }    
     });
-
-
+})
