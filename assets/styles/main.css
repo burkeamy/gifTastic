@@ -9,7 +9,13 @@ header {
     margin: -1px;
 }
 
-#animalButtons {
-    padding: 30px;
-    margin-left: 100px;
+button {
+    padding: 10px;
+    margin-left: 10px;
+    background-color: white;
+    border: none;
+}
+
+i {
+    padding: 3px;
 }
