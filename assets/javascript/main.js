@@ -34,7 +34,7 @@ $.ajax({
         var animalDiv = $("<div class = 'animal'>");
         var stillUrl = response.data[i].images.fixed_height_still.url;
         var rating = response.data[i].rating;
-        var moveUrl = response.data[i].bitly_url;
+        var moveUrl = response.data[i].images.fixed_height.url;
         var img = $("<img>").attr("src", stillUrl);
             
         var ratingEl = $("<P>").text("Rating: "+ rating);
